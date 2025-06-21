@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Axrorbek Ibrohimjonov - Interactive Terminal Portfolio</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap');
+
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    background: #001122;
+    color: #66ccff;
+    font-family: 'Fira Mono', monospace;
+    font-size: 1.1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ----- TOP COMMENT SECTION ----- */
+  #command-help {
+    background: #000a1a;
+    color: #335577;
+    padding: 15px 20px;
+    font-family: 'Fira Mono', monospace;
+    user-select: text;
+    border-bottom: 1px solid #224477;
+    white-space: pre-wrap;
+    line-height: 1.4;
+    max-height: 130px;
+    overflow-y: auto;
+  }
+
+  /* ----- TERMINAL SECTION ----- */
+  #terminal {
+    flex-grow: 1;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
+    background: #001122;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  #terminal-content {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .line {
+    white-space: pre-wrap;
+    line-height: 1.4;
+  }
+  .prompt-line {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .prompt {
+    color: #3399ff;
+    user-select: none;
+    margin-right: 0.6rem;
+  }
+  #input-command {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #66ccff;
+    font-family: 'Fira Mono', monospace;
+    font-size: 1.1rem;
+    user-select: text;
+  }
+  #input-command::placeholder {
+    color: #335577;
+  }
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    background: #66ccff;
+    animation: blink 1s steps(1) infinite;
+    vertical-align: bottom;
+    margin-left: 2px;
+  }
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+  a {
+    color: #88ccff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Scrollbar styling for the top comment */
+  #command-help::-webkit-scrollbar {
+    width: 8px;
+  }
+  #command-help::-webkit-scrollbar-thumb {
+    background: #224477;
+    border-radius: 4px;
+  }
+  #command-help::-webkit-scrollbar-track {
+    background: #000a1a;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    #command-help {
+      max-height: 90px;
+      font-size: 0.95rem;
+    }
+    #input-command {
+      font-size: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top comment block with commands -->
+<div id="command-help" aria-label="Available commands and descriptions">
+/* Commands available:
+ - whoami    : Show my full name and profession
+ - skills   : List of technologies I use
+ - education: My educational background
+ - contact  : How to reach me
+ - clear    : Clear the terminal screen
+ - help     : Show this help text
+*/
+</div>
+
+<!-- Terminal container -->
+<div id="terminal" role="application" aria-live="polite" aria-atomic="false">
+
+  <div id="terminal-content" role="log" aria-live="polite" aria-atomic="false">
+    <div class="line">// Welcome to Axrorbek Ibrohimjonov's Interactive Terminal Portfolio</div>
+    <div class="line">// Type a command and press Enter. Try: whoami, skills, education, contact, help</div>
+  </div>
+
+  <div class="prompt-line" role="textbox" aria-label="Command input">
+    <span class="prompt">axrorbek@portfolio:~$</span>
+    <input
+      id="input-command"
+      type="text"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
+      placeholder="Type a command..."
+      aria-describedby="command-help"
+    />
+    <span class="cursor"></span>
+  </div>
+</div>
+
+<script>
+  const terminalContent = document.getElementById('terminal-content');
+  const inputCommand = document.getElementById('input-command');
+
+  // Commands data
+  const commands = {
+    help: [
+      'Available commands:',
+      '- whoami    : Show my full name and profession',
+      '- skills   : List of technologies I use',
+      '- education: My educational background',
+      '- contact  : How to reach me',
+      '- clear    : Clear the terminal screen',
+      '- help     : Show this help text',
+    ],
+    whoami: [
+      'Axrorbek Ibrohimjonov',
+      'Backend Developer',
+      'Python, Django, REST APIs specialist',
+    ],
+    skills: [
+      'Python',
+      'Django',
+      'Django REST Framework',
+      'SQL',
+      'PostgreSQL',
+      'MongoDB',
+      'Docker',
+      'Nginx',
+      'Apache',
+    ],
+    education: [
+      '2012–2019: Secondary School #20',
+      '2019–2023: Specialized Boarding School #9',
+      '2024–Present: Acharya University - Bachelor’s in Computer Technologies (1st year)',
+    ],
+    contact: [
+      'Email   : axrorback@gmail.com',
+      'Telegram: @axrorback',
+      'Instagram: @axrorback',
+      'Phone   : +998 93 100 40 05',
+    ],
+  };
+
+  // Typing effect function
+  async function typeLines(lines) {
+    for (const line of lines) {
+      await typeLine(line);
+    }
+  }
+
+  function typeLine(line) {
+    return new Promise(resolve => {
+      const lineElem = document.createElement('div');
+      lineElem.className = 'line';
+      terminalContent.appendChild(lineElem);
+
+      let i = 0;
+      function typeChar() {
+        if (i <= line.length) {
+          lineElem.textContent = line.substring(0, i);
+          i++;
+          setTimeout(typeChar, 40);
+        } else {
+          resolve();
+        }
+      }
+      typeChar();
+    });
+  }
+
+  // Handle command input
+  inputCommand.focus();
+
+  inputCommand.addEventListener('keydown', async (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+
+      const input = inputCommand.value.trim().toLowerCase();
+      if (!input) return;
+
+      // Show the command entered
+      const cmdLine = document.createElement('div');
+      cmdLine.className = 'line';
+      cmdLine.innerHTML = `<span class="prompt">axrorbek@portfolio:~$</span> ${inputCommand.value}`;
+      terminalContent.appendChild(cmdLine);
+
+      inputCommand.value = '';
+
+      if (input === 'clear') {
+        terminalContent.innerHTML = '';
+        return;
+      }
+
+      if (commands[input]) {
+        await typeLines(commands[input]);
+      } else {
+        await typeLines([`Command not found: ${input}`]);
+      }
+
+      terminalContent.scrollTop = terminalContent.scrollHeight;
+    }
+  });
+
+  // Keep input focused
+  terminalContent.addEventListener('click', () => {
+    inputCommand.focus();
+  });
+
+  // Auto scroll on content added
+  const observer = new MutationObserver(() => {
+    terminalContent.scrollTop = terminalContent.scrollHeight;
+  });
+  observer.observe(terminalContent, { childList: true });
+</script>
+
+</body>
+</html>
