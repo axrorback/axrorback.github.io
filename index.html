@@ -1,283 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Axrorbek Ibrohimjonov - Interactive Terminal Portfolio</title>
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap');
-
-  body, html {
-    margin: 0; padding: 0; height: 100%;
-    background: #001122;
-    color: #66ccff;
-    font-family: 'Fira Mono', monospace;
-    font-size: 1.1rem;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* ----- TOP COMMENT SECTION ----- */
-  #command-help {
-    background: #000a1a;
-    color: #335577;
-    padding: 15px 20px;
-    font-family: 'Fira Mono', monospace;
-    user-select: text;
-    border-bottom: 1px solid #224477;
-    white-space: pre-wrap;
-    line-height: 1.4;
-    max-height: 130px;
-    overflow-y: auto;
-  }
-
-  /* ----- TERMINAL SECTION ----- */
-  #terminal {
-    flex-grow: 1;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 20px;
-    background: #001122;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    user-select: none;
-    overflow: hidden;
-  }
-
-  #terminal-content {
-    overflow-y: auto;
-    flex-grow: 1;
-    padding-right: 10px;
-    margin-bottom: 10px;
-  }
-
-  .line {
-    white-space: pre-wrap;
-    line-height: 1.4;
-  }
-  .prompt-line {
-    display: flex;
-    align-items: center;
-    margin-top: 8px;
-  }
-  .prompt {
-    color: #3399ff;
-    user-select: none;
-    margin-right: 0.6rem;
-  }
-  #input-command {
-    flex-grow: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #66ccff;
-    font-family: 'Fira Mono', monospace;
-    font-size: 1.1rem;
-    user-select: text;
-  }
-  #input-command::placeholder {
-    color: #335577;
-  }
-  .cursor {
-    display: inline-block;
-    width: 10px;
-    background: #66ccff;
-    animation: blink 1s steps(1) infinite;
-    vertical-align: bottom;
-    margin-left: 2px;
-  }
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    50.01%, 100% { opacity: 0; }
-  }
-  a {
-    color: #88ccff;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* Scrollbar styling for the top comment */
-  #command-help::-webkit-scrollbar {
-    width: 8px;
-  }
-  #command-help::-webkit-scrollbar-thumb {
-    background: #224477;
-    border-radius: 4px;
-  }
-  #command-help::-webkit-scrollbar-track {
-    background: #000a1a;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    #command-help {
-      max-height: 90px;
-      font-size: 0.95rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Axrorjon | Portfolio</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
     }
-    #input-command {
-      font-size: 1rem;
+    .hero {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      padding: 100px 0;
     }
-  }
-</style>
+    .hero h1 {
+      font-size: 3rem;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .project-box {
+      background: #f8f9fa;
+      border-left: 5px solid #007bff;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 5px;
+    }
+    footer {
+      background: #2c3e50;
+      color: #fff;
+      padding: 30px 0;
+    }
+    footer a {
+      color: #fff;
+      margin: 0 10px;
+    }
+    .contact-form input, .contact-form textarea {
+      margin-bottom: 15px;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Top comment block with commands -->
-<div id="command-help" aria-label="Available commands and descriptions">
-/* Commands available:
- - whoami    : Show my full name and profession
- - skills   : List of technologies I use
- - education: My educational background
- - contact  : How to reach me
- - clear    : Clear the terminal screen
- - help     : Show this help text
-*/
-</div>
-
-<!-- Terminal container -->
-<div id="terminal" role="application" aria-live="polite" aria-atomic="false">
-
-  <div id="terminal-content" role="log" aria-live="polite" aria-atomic="false">
-    <div class="line">// Welcome to Axrorbek Ibrohimjonov's Interactive Terminal Portfolio</div>
-    <div class="line">// Type a command and press Enter. Try: whoami, skills, education, contact, help</div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Axrorjon</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
   </div>
+</nav>
 
-  <div class="prompt-line" role="textbox" aria-label="Command input">
-    <span class="prompt">axrorbek@portfolio:~$</span>
-    <input
-      id="input-command"
-      type="text"
-      autocomplete="off"
-      autocorrect="off"
-      autocapitalize="off"
-      spellcheck="false"
-      placeholder="Type a command..."
-      aria-describedby="command-help"
-    />
-    <span class="cursor"></span>
+<!-- Hero -->
+<section class="hero text-center">
+  <div class="container">
+    <h1>Hello, I'm Axrorjon</h1>
+    <p class="lead">A passionate Full-Stack Developer | Flask, JS, AI, Supabase</p>
+    <a href="#projects" class="btn btn-primary mt-3">Explore Projects</a>
   </div>
-</div>
+</section>
 
-<script>
-  const terminalContent = document.getElementById('terminal-content');
-  const inputCommand = document.getElementById('input-command');
+<!-- About -->
+<section id="about" class="py-5">
+  <div class="container text-center">
+    <h2 class="section-title">About Me</h2>
+    <p class="lead">I am a Computer Science student at Acharya University. I specialize in Flask, Supabase, and building full-stack applications. I enjoy creating smart, functional, and visually appealing web apps. My recent works include educational tools, forums, and interactive platforms. I believe in building for real-world impact.</p>
+  </div>
+</section>
 
-  // Commands data
-  const commands = {
-    help: [
-      'Available commands:',
-      '- whoami    : Show my full name and profession',
-      '- skills   : List of technologies I use',
-      '- education: My educational background',
-      '- contact  : How to reach me',
-      '- clear    : Clear the terminal screen',
-      '- help     : Show this help text',
-    ],
-    whoami: [
-      'Axrorbek Ibrohimjonov',
-      'Backend Developer',
-      'Python, Django, REST APIs specialist',
-    ],
-    skills: [
-      'Python',
-      'Django',
-      'Django REST Framework',
-      'SQL',
-      'PostgreSQL',
-      'MongoDB',
-      'Docker',
-      'Nginx',
-      'Apache',
-    ],
-    education: [
-      '2012–2019: Secondary School #20',
-      '2019–2023: Specialized Boarding School #9',
-      '2024–Present: Acharya University - Bachelor’s in Computer Technologies (1st year)',
-    ],
-    contact: [
-      'Email   : axrorback@gmail.com',
-      'Telegram: @axrorback',
-      'Instagram: @axrorback',
-      'Phone   : +998 93 100 40 05',
-    ],
-  };
+<!-- Skills -->
+<section id="skills" class="bg-light py-5">
+  <div class="container">
+    <h2 class="section-title text-center">Skills</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <p>Python / Flask</p>
+        <div class="progress"><div class="progress-bar bg-success" style="width: 90%;">90%</div></div>
+      </div>
+      <div class="col-md-6">
+        <p>HTML / CSS / Bootstrap</p>
+        <div class="progress"><div class="progress-bar bg-info" style="width: 85%;">85%</div></div>
+      </div>
+      <div class="col-md-6 mt-4">
+        <p>JavaScript</p>
+        <div class="progress"><div class="progress-bar bg-warning" style="width: 75%;">75%</div></div>
+      </div>
+      <div class="col-md-6 mt-4">
+        <p>Supabase / PostgreSQL</p>
+        <div class="progress"><div class="progress-bar bg-danger" style="width: 70%;">70%</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // Typing effect function
-  async function typeLines(lines) {
-    for (const line of lines) {
-      await typeLine(line);
-    }
-  }
+<!-- Projects -->
+<section id="projects" class="py-5">
+  <div class="container">
+    <h2 class="section-title text-center">My Projects</h2>
+    
+    <div class="project-box">
+      <h5>🧑‍🎓 Student Forum (Q&A Platform)</h5>
+      <p>A web forum for students to ask and answer questions. Features include email verification, topic-based insights, user profiles, and a clean modern UI.</p>
+    </div>
+    
+    <div class="project-box">
+      <h5>⌨️ Typing Speed Test</h5>
+      <p>Monkeytype-style real-time typing test with difficulty levels, accuracy tracking, live countdown, and graphical results. Built using Flask + JS.</p>
+    </div>
+    
+    <div class="project-box">
+      <h5>🌦️ Weather Forecast App</h5>
+      <p>A beautiful weather application using OpenWeather API, local timezone, real-time charts, auto-location detection, and 5-day forecast. No login required.</p>
+    </div>
+    
+    <div class="project-box">
+      <h5>📊 Quiz Generator with ChatGPT</h5>
+      <p>Dynamic quiz app where students input topic & time limit, then receive AI-generated questions using GPT-4. Results stored in Supabase and leaderboard supported.</p>
+    </div>
+    
+    <div class="project-box">
+      <h5>🧪 Python + HTML Code Runner</h5>
+      <p>A dual lab IDE built in Flask. Simulates terminal-style input/output for Python and live HTML rendering. Includes share/download features, syntax highlighting, and branded UI.</p>
+    </div>
 
-  function typeLine(line) {
-    return new Promise(resolve => {
-      const lineElem = document.createElement('div');
-      lineElem.className = 'line';
-      terminalContent.appendChild(lineElem);
+  </div>
+</section>
 
-      let i = 0;
-      function typeChar() {
-        if (i <= line.length) {
-          lineElem.textContent = line.substring(0, i);
-          i++;
-          setTimeout(typeChar, 40);
-        } else {
-          resolve();
-        }
-      }
-      typeChar();
-    });
-  }
+<!-- Contact -->
+<section id="contact" class="bg-light py-5">
+  <div class="container">
+    <h2 class="section-title text-center">Contact Me</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form action="https://formspree.io/f/xzzvrdqq" method="POST" class="contact-form">
+          <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+          <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+          <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+        <div class="mt-4">
+          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:axrorback@gmail.com">axrorback@gmail.com</a></p>
+          <p><i class="fas fa-phone"></i> Phone: +998 93 100 40 05</p>
+          <p><i class="fas fa-map-marker-alt"></i> Location: Tashkent, Uzbekistan</p>
+          <p><i class="fab fa-telegram"></i> Telegram: <a href="https://t.me/axrorback" target="_blank">@axrorback</a></p>
+          <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/axrorback" target="_blank">github.com/axrorback</a></p>
+          <p><i class="fab fa-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/axrorback/" target="_blank">axrorback</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  // Handle command input
-  inputCommand.focus();
+<!-- Footer -->
+<footer class="text-center">
+  <div class="container">
+    <p>© 2025 Axrorjon. All rights reserved.</p>
+    <a href="https://github.com/axrorback" target="_blank"><i class="fab fa-github fa-lg"></i></a>
+    <a href="https://t.me/axrorback" target="_blank"><i class="fab fa-telegram fa-lg"></i></a>
+  </div>
+</footer>
 
-  inputCommand.addEventListener('keydown', async (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-
-      const input = inputCommand.value.trim().toLowerCase();
-      if (!input) return;
-
-      // Show the command entered
-      const cmdLine = document.createElement('div');
-      cmdLine.className = 'line';
-      cmdLine.innerHTML = `<span class="prompt">axrorbek@portfolio:~$</span> ${inputCommand.value}`;
-      terminalContent.appendChild(cmdLine);
-
-      inputCommand.value = '';
-
-      if (input === 'clear') {
-        terminalContent.innerHTML = '';
-        return;
-      }
-
-      if (commands[input]) {
-        await typeLines(commands[input]);
-      } else {
-        await typeLines([`Command not found: ${input}`]);
-      }
-
-      terminalContent.scrollTop = terminalContent.scrollHeight;
-    }
-  });
-
-  // Keep input focused
-  terminalContent.addEventListener('click', () => {
-    inputCommand.focus();
-  });
-
-  // Auto scroll on content added
-  const observer = new MutationObserver(() => {
-    terminalContent.scrollTop = terminalContent.scrollHeight;
-  });
-  observer.observe(terminalContent, { childList: true });
-</script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
