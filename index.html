@@ -1,279 +1,158 @@
 <!doctype html>
-<html lang="uz">
+<html lang="uz" data-bs-theme="dark">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ahrorjon Ibrohimjonov — Portfolio</title>
 
-  <!-- Bootstrap 5 CSS -->
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- Google Font (optional) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --accent: #0d6efd;
-      --muted: #6c757d;
-      --card-bg: rgba(255,255,255,0.02);
-    }
-    body{
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,#0f1724 0%, #071126 70%);
-      color: #e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+    body {
+      font-family: 'Inter', sans-serif;
       padding-bottom: 4rem;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    [data-bs-theme="dark"] body {
+      background: linear-gradient(to bottom, #0f172a, #020617);
+      color: #e2e8f0;
+    }
+
+    [data-bs-theme="light"] body {
+      background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+      color: #1e293b;
     }
 
     .glass {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.04);
-      backdrop-filter: blur(6px);
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transition: background 0.4s, border 0.4s;
     }
 
-    /* Profile image circular */
-    .profile-wrap{
-      width: 160px;
-      height: 160px;
-      border-radius: 999px;
+    [data-bs-theme="light"] .glass {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .profile-wrap {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
       overflow: hidden;
-      display: inline-block;
-      box-shadow: 0 8px 24px rgba(3,3,12,0.6), 0 2px 8px rgba(13,110,253,0.12);
-      border: 4px solid rgba(255,255,255,0.04);
-    }
-    .profile-wrap img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
+      border: 3px solid rgba(255,255,255,0.1);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.6);
     }
 
-    .title {
-      font-weight:700;
-      letter-spacing: -0.3px;
+    .btn-accent {
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
       color: #fff;
-    }
-
-    .muted { color: var(--muted); }
-
-    .badge-social img { height: 28px; }
-
-    .stat-number { font-weight:700; font-size:1.25rem; }
-    .stat-label { color:var(--muted); font-size:0.85rem; }
-
-    /* Card spacing */
-    .card { border: none; border-radius: 14px; padding:1.1rem; }
-    .btn-accent{
-      background: linear-gradient(90deg,#2563eb,#7c3aed);
-      color:#fff;
       border: none;
-      box-shadow: 0 6px 18px rgba(99,102,241,0.18);
     }
-    .hero-center { transform: translateZ(0); }
 
-    /* Responsive tweaks */
-    @media (max-width:576px){
-      .profile-wrap{ width:120px; height:120px; }
-      .title{ font-size:1.25rem; }
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      font-size: 1.3rem;
+    }
+
+    .theme-toggle .bi {
+      transition: transform 0.3s;
+    }
+
+    @media (max-width: 576px) {
+      .profile-wrap { width: 100px; height: 100px; }
+      h1 { font-size: 1.4rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Toggle theme button -->
+  <button class="btn btn-outline-secondary theme-toggle" onclick="toggleTheme()" id="theme-btn" aria-label="Toggle Theme">
+    <i class="bi bi-moon-stars-fill"></i>
+  </button>
+
   <div class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <div class="d-flex gap-4 align-items-center glass p-4 rounded-4 hero-center">
-          <!-- Profile -->
-          <div class="d-flex align-items-center gap-3">
-            <div class="profile-wrap">
-              <!-- Replace profile.jpg with your image file or external URL -->
-              <img src="profile.jpg" alt="Ahrorjon Ibrohimjonov">
-            </div>
-          </div>
+    <div class="text-center mb-4">
+      <div class="profile-wrap mx-auto">
+        <img src="profile.jpg" alt="Ahrorjon Ibrohimjonov" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+      <h1 class="mt-3">Ahrorjon Ibrohimjonov <small class="text-muted">👋</small></h1>
+      <p class="text-muted">🎓 Kompyuter fanlari talabasi — Flask · Supabase · Python Developer</p>
+    </div>
 
-          <!-- Info -->
-          <div class="flex-grow-1">
-            <h1 class="mb-1 title">Ahrorjon Ibrohimjonov <small class="text-muted fs-6">👋</small></h1>
-            <p class="mb-2 muted">🎓 Computer Science Student at <strong>Acharya University</strong> · Backend & Flask · Supabase</p>
+    <div class="text-center mb-3">
+      <a href="https://github.com/axrorback" class="btn btn-outline-primary btn-sm me-2" target="_blank"><i class="bi bi-github"></i> GitHub</a>
+      <a href="mailto:axrorback@gmail.com" class="btn btn-accent btn-sm"><i class="bi bi-envelope-fill"></i> Email</a>
+      <a href="https://t.me/axrorback" class="btn btn-outline-info btn-sm ms-2" target="_blank"><i class="bi bi-telegram"></i> Telegram</a>
+    </div>
 
-            <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
-              <a href="https://github.com/axrorback" target="_blank" class="btn btn-sm btn-outline-light">
-                <i class="bi bi-github me-2"></i>GitHub
-              </a>
-              <a href="https://tirikchilik.uz/axrorback" target="_blank" class="btn btn-sm btn-outline-light">
-                <i class="bi bi-globe me-2"></i>Support
-              </a>
-              <a href="mailto:axrorback@gmail.com" class="btn btn-sm btn-accent">
-                <i class="bi bi-envelope-fill me-2"></i>Email
-              </a>
-            </div>
-
-            <!-- Short typing-like presentation (simple) -->
-            <div class="mb-3">
-              <small class="muted">I build modern web apps with Python, Flask & Supabase and Django & DRF </small>
-            </div>
-
-            <!-- Live stats -->
-            <div class="row g-2 align-items-center">
-              <div class="col-auto">
-                <div class="card p-3 glass">
-                  <div class="d-flex align-items-center gap-3">
-                    <div>
-                      <div class="stat-number" id="followers-count">—</div>
-                      <div class="stat-label">Followers</div>
-                    </div>
-                    <div class="vr"></div>
-                    <div>
-                      <div class="stat-number" id="repos-count">—</div>
-                      <div class="stat-label">Public repos</div>
-                    </div>
-                    <div class="vr"></div>
-                    <div>
-                      <div class="stat-number" id="stars-count">—</div>
-                      <div class="stat-label">Total stars</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- GitHub Readme Stats image -->
-              <div class="col">
-                <div class="card p-2 glass d-flex align-items-center">
-                  <img id="readme-stats" src="https://github-readme-stats.vercel.app/api?username=axrorback&show_icons=true&theme=transparent" alt="GitHub Stats" style="max-width:100%; height:56px; object-fit:contain;">
-                </div>
-              </div>
-            </div>
-
-          </div> <!-- /Info -->
-        </div>
-
-        <!-- About & Tech -->
-        <div class="row mt-4">
-          <div class="col-lg-8">
-            <div class="card glass p-4">
-              <h5>🌟 About me</h5>
-              <p class="muted mb-0">
-                I'm a developer from Uzbekistan 🇺🇿 studying Computer Science at Acharya University.
-                I love creating real-world solutions in education and productivity using Python, Flask and modern cloud databases.
-              </p>
-              <hr class="my-3">
-              <h6 class="mb-2">🛠 Tech stack</h6>
-              <div class="d-flex flex-wrap gap-2">
-                <span class="badge bg-light text-dark">Python</span>
-                <span class="badge bg-light text-dark">Flask</span>
-                <span class="badge bg-light text-dark">JavaScript</span>
-                <span class="badge bg-light text-dark">HTML</span>
-                <span class="badge bg-light text-dark">CSS</span>
-                <span class="badge bg-light text-dark">PostgreSQL</span>
-                <span class="badge bg-light text-dark">Supabase</span>
-                <span class="badge bg-light text-dark">Docker</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mt-3 mt-lg-0">
-            <div class="card glass p-3 text-center">
-              <h6>📬 Contact</h6>
-              <p class="muted mb-2">Email: <a href="mailto:axrorback@gmail.com">axrorback@gmail.com</a></p>
-              <p class="muted mb-3">Telegram: <a href="https://t.me/axrorback" target="_blank">@axrorback</a></p>
-              <a href="https://www.linkedin.com/in/axrorback/" target="_blank" class="btn btn-outline-light btn-sm">
-                <i class="bi bi-linkedin me-2"></i>LinkedIn
-              </a>
-            </div>
-
-            <div class="card glass p-3 mt-3">
-              <h6 class="mb-2">🔗 Quick links</h6>
-              <ul class="list-unstyled mb-0">
-                <li><a class="text-decoration-none" href="https://github.com/axrorback" target="_blank"><i class="bi bi-github"></i> GitHub</a></li>
-                <li><a class="text-decoration-none" href="https://softwareuz.github.io" target="_blank"><i class="bi bi-globe"></i> Portfolio</a></li>
-              </ul>
-            </div>
+    <div class="row g-4 mt-4">
+      <div class="col-lg-8">
+        <div class="glass p-4 rounded">
+          <h5>🧑‍💻 Men haqimda</h5>
+          <p>Men O‘zbekistonlik dasturchiman. Python va Flask orqali veb ilovalarni yaratishni yaxshi ko‘raman. Maqsadim — haqiqiy muammolarga foydali yechimlar topish.</p>
+          <hr>
+          <h6>🛠 Texnologiyalar</h6>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-light text-dark">Python</span>
+            <span class="badge bg-light text-dark">Flask</span>
+            <span class="badge bg-light text-dark">Django</span>
+            <span class="badge bg-light text-dark">Supabase</span>
+            <span class="badge bg-light text-dark">Docker</span>
+            <span class="badge bg-light text-dark">PostgreSQL</span>
           </div>
         </div>
-
-        <!-- Projects or README text area -->
-        <div class="card glass p-4 mt-4">
-          <h5>Projects</h5>
-          <p class="muted mb-0">Hozirgi loyihalar va kuzatuvlar uchun GitHub profilimni tekshiring. Bu sahifa GitHub Pages uchun mo‘ljallangan va istalgan vaqtda yangilanishi mumkin.</p>
+      </div>
+      <div class="col-lg-4">
+        <div class="glass p-4 rounded text-center">
+          <h6>📈 GitHub Statistika</h6>
+          <img id="readme-stats" class="img-fluid" src="https://github-readme-stats.vercel.app/api?username=axrorback&show_icons=true&theme=transparent&hide_border=true" alt="GitHub Stats">
         </div>
-
-        <!-- Footer -->
-        <footer class="text-center text-muted mt-4">
-          <small>Made with ❤️ by Ahrorjon Ibrohimjonov</small>
-        </footer>
-
       </div>
     </div>
+
+    <div class="glass mt-4 p-4 rounded">
+      <h5>🚀 Loyiha va Faoliyat</h5>
+      <p class="text-muted">GitHub profilimda ochiq manbali loyihalarimni ko‘rishingiz mumkin. Flask, Django, va Supabase asosidagi ishlanmalar joylangan.</p>
+    </div>
+
+    <footer class="text-center mt-4 text-muted">
+      <small>© 2025 Ahrorjon Ibrohimjonov · Barcha huquqlar himoyalangan</small>
+    </footer>
   </div>
 
-  <!-- Bootstrap bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
   <script>
-    // Animate number helper
-    function animateNumber(el, to, duration = 800) {
-      const start = 0;
-      const range = to - start;
-      const startTime = performance.now();
-      function step(now) {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const value = Math.floor(start + range * progress);
-        el.textContent = value.toLocaleString();
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
+    // Theme toggle + save to localStorage
+    function toggleTheme() {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-btn').querySelector('i');
+      const current = html.getAttribute('data-bs-theme');
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-bs-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      icon.className = newTheme === 'dark' ? 'bi bi-moon-stars-fill' : 'bi bi-brightness-high-fill';
     }
 
-    // Fetch GitHub public info (no auth) - rate-limited but fine for public pages
-    async function fetchGitHubInfo(username = 'axrorback') {
-      try {
-        // Basic user info
-        const userResp = await fetch(`https://api.github.com/users/${username}`);
-        if (!userResp.ok) throw new Error('GitHub API error');
-        const user = await userResp.json();
-
-        // Repos to calculate total stars
-        // Fetch first page of repos (100). If more repos exist, you'd need pagination.
-        const reposResp = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
-        if (!reposResp.ok) throw new Error('GitHub repos error');
-        const repos = await reposResp.json();
-
-        const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
-
-        // Populate UI (with animated counters)
-        const followersEl = document.getElementById('followers-count');
-        const reposEl = document.getElementById('repos-count');
-        const starsEl = document.getElementById('stars-count');
-        animateNumber(followersEl, user.followers || 0);
-        animateNumber(reposEl, user.public_repos || repos.length || 0);
-        animateNumber(starsEl, totalStars || 0);
-
-        // Optionally show avatar (if you prefer to use GitHub avatar instead of local image)
-        // document.querySelector('.profile-wrap img').src = user.avatar_url;
-
-      } catch (err) {
-        // Fallback: show dashes
-        document.getElementById('followers-count').textContent = '—';
-        document.getElementById('repos-count').textContent = '—';
-        document.getElementById('stars-count').textContent = '—';
-        console.warn('GitHub info fetch failed:', err);
-      }
-    }
-
-    // Run on load
+    // Load theme from storage
     document.addEventListener('DOMContentLoaded', () => {
-      fetchGitHubInfo('axrorback');
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-bs-theme', savedTheme);
+      const icon = document.getElementById('theme-btn').querySelector('i');
+      icon.className = savedTheme === 'dark' ? 'bi bi-moon-stars-fill' : 'bi bi-brightness-high-fill';
 
-      // Make GitHub Readme Stats image slightly dynamic (force refresh if needed)
-      const readme = document.getElementById('readme-stats');
-      readme.src = readme.src + '&cache=' + Date.now();
+      // GitHub stats refresh
+      const img = document.getElementById('readme-stats');
+      img.src += "&cache=" + Date.now();
     });
   </script>
+
 </body>
 </html>
