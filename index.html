@@ -1,181 +1,279 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="uz">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Axrorjon | Portfolio</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ahrorjon Ibrohimjonov — Portfolio</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Google Font (optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      scroll-behavior: smooth;
+    :root{
+      --accent: #0d6efd;
+      --muted: #6c757d;
+      --card-bg: rgba(255,255,255,0.02);
     }
-    .hero {
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    body{
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#0f1724 0%, #071126 70%);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding-bottom: 4rem;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+    }
+
+    /* Profile image circular */
+    .profile-wrap{
+      width: 160px;
+      height: 160px;
+      border-radius: 999px;
+      overflow: hidden;
+      display: inline-block;
+      box-shadow: 0 8px 24px rgba(3,3,12,0.6), 0 2px 8px rgba(13,110,253,0.12);
+      border: 4px solid rgba(255,255,255,0.04);
+    }
+    .profile-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .title {
+      font-weight:700;
+      letter-spacing: -0.3px;
       color: #fff;
-      padding: 100px 0;
     }
-    .hero h1 {
-      font-size: 3rem;
+
+    .muted { color: var(--muted); }
+
+    .badge-social img { height: 28px; }
+
+    .stat-number { font-weight:700; font-size:1.25rem; }
+    .stat-label { color:var(--muted); font-size:0.85rem; }
+
+    /* Card spacing */
+    .card { border: none; border-radius: 14px; padding:1.1rem; }
+    .btn-accent{
+      background: linear-gradient(90deg,#2563eb,#7c3aed);
+      color:#fff;
+      border: none;
+      box-shadow: 0 6px 18px rgba(99,102,241,0.18);
     }
-    .section-title {
-      font-size: 2.2rem;
-      font-weight: bold;
-      margin-bottom: 30px;
-    }
-    .project-box {
-      background: #f8f9fa;
-      border-left: 5px solid #007bff;
-      padding: 20px;
-      margin-bottom: 25px;
-      border-radius: 5px;
-    }
-    footer {
-      background: #2c3e50;
-      color: #fff;
-      padding: 30px 0;
-    }
-    footer a {
-      color: #fff;
-      margin: 0 10px;
-    }
-    .contact-form input, .contact-form textarea {
-      margin-bottom: 15px;
+    .hero-center { transform: translateZ(0); }
+
+    /* Responsive tweaks */
+    @media (max-width:576px){
+      .profile-wrap{ width:120px; height:120px; }
+      .title{ font-size:1.25rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-  <div class="container">
-    <a class="navbar-brand" href="#">Axrorjon</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- Hero -->
-<section class="hero text-center">
-  <div class="container">
-    <h1>Hello, I'm Axrorjon</h1>
-    <p class="lead">A passionate Full-Stack Developer | Flask, JS, AI, Supabase</p>
-    <a href="#projects" class="btn btn-primary mt-3">Explore Projects</a>
-  </div>
-</section>
-
-<!-- About -->
-<section id="about" class="py-5">
-  <div class="container text-center">
-    <h2 class="section-title">About Me</h2>
-    <p class="lead">I am a Computer Science student at Acharya University. I specialize in Flask, Supabase, and building full-stack applications. I enjoy creating smart, functional, and visually appealing web apps. My recent works include educational tools, forums, and interactive platforms. I believe in building for real-world impact.</p>
-  </div>
-</section>
-
-<!-- Skills -->
-<section id="skills" class="bg-light py-5">
-  <div class="container">
-    <h2 class="section-title text-center">Skills</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <p>Python / Flask</p>
-        <div class="progress"><div class="progress-bar bg-success" style="width: 90%;">90%</div></div>
-      </div>
-      <div class="col-md-6">
-        <p>HTML / CSS / Bootstrap</p>
-        <div class="progress"><div class="progress-bar bg-info" style="width: 85%;">85%</div></div>
-      </div>
-      <div class="col-md-6 mt-4">
-        <p>JavaScript</p>
-        <div class="progress"><div class="progress-bar bg-warning" style="width: 75%;">75%</div></div>
-      </div>
-      <div class="col-md-6 mt-4">
-        <p>Supabase / PostgreSQL</p>
-        <div class="progress"><div class="progress-bar bg-danger" style="width: 70%;">70%</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Projects -->
-<section id="projects" class="py-5">
-  <div class="container">
-    <h2 class="section-title text-center">My Projects</h2>
-    
-    <div class="project-box">
-      <h5>🧑‍🎓 Student Forum (Q&A Platform)</h5>
-      <p>A web forum for students to ask and answer questions. Features include email verification, topic-based insights, user profiles, and a clean modern UI.</p>
-    </div>
-    
-    <div class="project-box">
-      <h5>⌨️ Typing Speed Test</h5>
-      <p>Monkeytype-style real-time typing test with difficulty levels, accuracy tracking, live countdown, and graphical results. Built using Flask + JS.</p>
-    </div>
-    
-    <div class="project-box">
-      <h5>🌦️ Weather Forecast App</h5>
-      <p>A beautiful weather application using OpenWeather API, local timezone, real-time charts, auto-location detection, and 5-day forecast. No login required.</p>
-    </div>
-    
-    <div class="project-box">
-      <h5>📊 Quiz Generator with ChatGPT</h5>
-      <p>Dynamic quiz app where students input topic & time limit, then receive AI-generated questions using GPT-4. Results stored in Supabase and leaderboard supported.</p>
-    </div>
-    
-    <div class="project-box">
-      <h5>🧪 Python + HTML Code Runner</h5>
-      <p>A dual lab IDE built in Flask. Simulates terminal-style input/output for Python and live HTML rendering. Includes share/download features, syntax highlighting, and branded UI.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- Contact -->
-<section id="contact" class="bg-light py-5">
-  <div class="container">
-    <h2 class="section-title text-center">Contact Me</h2>
+  <div class="container py-5">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <form action="https://formspree.io/f/xzzvrdqq" method="POST" class="contact-form">
-          <input type="hidden" name="_redirect" value="https://axrorback.github.io/thankyou.html">
-          <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-          <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-          <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
-          <button type="submit" class="btn btn-primary">Send Message</button>
-        </form>
-        <div class="mt-4">
-          <p><i class="fas fa-envelope"></i> Email: <a href="mailto:axrorback@gmail.com">axrorback@gmail.com</a></p>
-          <p><i class="fas fa-phone"></i> Phone: +998 93 100 40 05</p>
-          <p><i class="fas fa-map-marker-alt"></i> Location: Tashkent, Uzbekistan</p>
-          <p><i class="fab fa-telegram"></i> Telegram: <a href="https://t.me/axrorback" target="_blank">@axrorback</a></p>
-          <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/axrorback" target="_blank">github.com/axrorback</a></p>
-          <p><i class="fab fa-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/axrorback/" target="_blank">axrorback</a></p>
+      <div class="col-lg-10">
+        <div class="d-flex gap-4 align-items-center glass p-4 rounded-4 hero-center">
+          <!-- Profile -->
+          <div class="d-flex align-items-center gap-3">
+            <div class="profile-wrap">
+              <!-- Replace profile.jpg with your image file or external URL -->
+              <img src="profile.jpg" alt="Ahrorjon Ibrohimjonov">
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="flex-grow-1">
+            <h1 class="mb-1 title">Ahrorjon Ibrohimjonov <small class="text-muted fs-6">👋</small></h1>
+            <p class="mb-2 muted">🎓 Computer Science Student at <strong>Acharya University</strong> · Backend & Flask · Supabase</p>
+
+            <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+              <a href="https://github.com/axrorback" target="_blank" class="btn btn-sm btn-outline-light">
+                <i class="bi bi-github me-2"></i>GitHub
+              </a>
+              <a href="https://tirikchilik.uz/axrorback" target="_blank" class="btn btn-sm btn-outline-light">
+                <i class="bi bi-globe me-2"></i>Support
+              </a>
+              <a href="mailto:axrorback@gmail.com" class="btn btn-sm btn-accent">
+                <i class="bi bi-envelope-fill me-2"></i>Email
+              </a>
+            </div>
+
+            <!-- Short typing-like presentation (simple) -->
+            <div class="mb-3">
+              <small class="muted">I build modern web apps with Python, Flask & Supabase and Django & DRF </small>
+            </div>
+
+            <!-- Live stats -->
+            <div class="row g-2 align-items-center">
+              <div class="col-auto">
+                <div class="card p-3 glass">
+                  <div class="d-flex align-items-center gap-3">
+                    <div>
+                      <div class="stat-number" id="followers-count">—</div>
+                      <div class="stat-label">Followers</div>
+                    </div>
+                    <div class="vr"></div>
+                    <div>
+                      <div class="stat-number" id="repos-count">—</div>
+                      <div class="stat-label">Public repos</div>
+                    </div>
+                    <div class="vr"></div>
+                    <div>
+                      <div class="stat-number" id="stars-count">—</div>
+                      <div class="stat-label">Total stars</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- GitHub Readme Stats image -->
+              <div class="col">
+                <div class="card p-2 glass d-flex align-items-center">
+                  <img id="readme-stats" src="https://github-readme-stats.vercel.app/api?username=axrorback&show_icons=true&theme=transparent" alt="GitHub Stats" style="max-width:100%; height:56px; object-fit:contain;">
+                </div>
+              </div>
+            </div>
+
+          </div> <!-- /Info -->
         </div>
+
+        <!-- About & Tech -->
+        <div class="row mt-4">
+          <div class="col-lg-8">
+            <div class="card glass p-4">
+              <h5>🌟 About me</h5>
+              <p class="muted mb-0">
+                I'm a developer from Uzbekistan 🇺🇿 studying Computer Science at Acharya University.
+                I love creating real-world solutions in education and productivity using Python, Flask and modern cloud databases.
+              </p>
+              <hr class="my-3">
+              <h6 class="mb-2">🛠 Tech stack</h6>
+              <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-light text-dark">Python</span>
+                <span class="badge bg-light text-dark">Flask</span>
+                <span class="badge bg-light text-dark">JavaScript</span>
+                <span class="badge bg-light text-dark">HTML</span>
+                <span class="badge bg-light text-dark">CSS</span>
+                <span class="badge bg-light text-dark">PostgreSQL</span>
+                <span class="badge bg-light text-dark">Supabase</span>
+                <span class="badge bg-light text-dark">Docker</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-3 mt-lg-0">
+            <div class="card glass p-3 text-center">
+              <h6>📬 Contact</h6>
+              <p class="muted mb-2">Email: <a href="mailto:axrorback@gmail.com">axrorback@gmail.com</a></p>
+              <p class="muted mb-3">Telegram: <a href="https://t.me/axrorback" target="_blank">@axrorback</a></p>
+              <a href="https://www.linkedin.com/in/axrorback/" target="_blank" class="btn btn-outline-light btn-sm">
+                <i class="bi bi-linkedin me-2"></i>LinkedIn
+              </a>
+            </div>
+
+            <div class="card glass p-3 mt-3">
+              <h6 class="mb-2">🔗 Quick links</h6>
+              <ul class="list-unstyled mb-0">
+                <li><a class="text-decoration-none" href="https://github.com/axrorback" target="_blank"><i class="bi bi-github"></i> GitHub</a></li>
+                <li><a class="text-decoration-none" href="https://softwareuz.github.io" target="_blank"><i class="bi bi-globe"></i> Portfolio</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects or README text area -->
+        <div class="card glass p-4 mt-4">
+          <h5>Projects</h5>
+          <p class="muted mb-0">Hozirgi loyihalar va kuzatuvlar uchun GitHub profilimni tekshiring. Bu sahifa GitHub Pages uchun mo‘ljallangan va istalgan vaqtda yangilanishi mumkin.</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-muted mt-4">
+          <small>Made with ❤️ by Ahrorjon Ibrohimjonov</small>
+        </footer>
+
       </div>
     </div>
   </div>
-</section>
 
-<!-- Footer -->
-<footer class="text-center">
-  <div class="container">
-    <p>© 2025 Axrorjon. All rights reserved.</p>
-    <a href="https://github.com/axrorback" target="_blank"><i class="fab fa-github fa-lg"></i></a>
-    <a href="https://t.me/axrorback" target="_blank"><i class="fab fa-telegram fa-lg"></i></a>
-  </div>
-</footer>
+  <!-- Bootstrap bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Animate number helper
+    function animateNumber(el, to, duration = 800) {
+      const start = 0;
+      const range = to - start;
+      const startTime = performance.now();
+      function step(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const value = Math.floor(start + range * progress);
+        el.textContent = value.toLocaleString();
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // Fetch GitHub public info (no auth) - rate-limited but fine for public pages
+    async function fetchGitHubInfo(username = 'axrorback') {
+      try {
+        // Basic user info
+        const userResp = await fetch(`https://api.github.com/users/${username}`);
+        if (!userResp.ok) throw new Error('GitHub API error');
+        const user = await userResp.json();
+
+        // Repos to calculate total stars
+        // Fetch first page of repos (100). If more repos exist, you'd need pagination.
+        const reposResp = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+        if (!reposResp.ok) throw new Error('GitHub repos error');
+        const repos = await reposResp.json();
+
+        const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+
+        // Populate UI (with animated counters)
+        const followersEl = document.getElementById('followers-count');
+        const reposEl = document.getElementById('repos-count');
+        const starsEl = document.getElementById('stars-count');
+        animateNumber(followersEl, user.followers || 0);
+        animateNumber(reposEl, user.public_repos || repos.length || 0);
+        animateNumber(starsEl, totalStars || 0);
+
+        // Optionally show avatar (if you prefer to use GitHub avatar instead of local image)
+        // document.querySelector('.profile-wrap img').src = user.avatar_url;
+
+      } catch (err) {
+        // Fallback: show dashes
+        document.getElementById('followers-count').textContent = '—';
+        document.getElementById('repos-count').textContent = '—';
+        document.getElementById('stars-count').textContent = '—';
+        console.warn('GitHub info fetch failed:', err);
+      }
+    }
+
+    // Run on load
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchGitHubInfo('axrorback');
+
+      // Make GitHub Readme Stats image slightly dynamic (force refresh if needed)
+      const readme = document.getElementById('readme-stats');
+      readme.src = readme.src + '&cache=' + Date.now();
+    });
+  </script>
 </body>
 </html>
